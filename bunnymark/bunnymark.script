@@ -1,0 +1,19 @@
+local SPRITES = {
+	hash("rabbitv3"),
+	hash("rabbitv3_batman"),
+	hash("rabbitv3_frankenstein"),
+	hash("rabbitv3_ash"),
+	hash("rabbitv3_bb8"),
+	hash("rabbitv3_neo")
+}
+
+function init(self)
+	math.random(os.time())
+	for i=1,100 do
+		local id = factory.create("#factory", vmath.vector3(math.random(1,240), 300, 0))
+		local sprite_id = SPRITES[math.random(1, #SPRITES)]
+		local sprite_url = msg.url(nil, id, "sprite")
+		sprite.play_flipbook(sprite_url, sprite_id)
+		go.animate(id, "position.y", go.PLAYBACK_LOOP_PINGPONG, 35, go.EASING_INQUAD, 1, math.random())
+	end
+end
